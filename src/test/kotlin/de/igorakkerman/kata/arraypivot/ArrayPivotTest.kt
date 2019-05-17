@@ -11,7 +11,7 @@ internal class ArrayPivotTest {
         var shiftsCount = 0
 
         override fun set(a: IntArray, index: Int, value: Int) {
-            shiftsCount ++
+            shiftsCount++
             super.set(a, index, value)
         }
     }
@@ -100,10 +100,11 @@ internal class ArrayPivotTest {
         assertThat(arrayPivot.solution(intArrayOf(1, 2, 3), 4))
                 .containsExactly(3, 1, 2)
 
-
-        // TODO: try to get this down to 1 * (3-1) by shifting whole blocks
         assertThat(arrayPivot.shiftsCount)
-                .isEqualTo(4 * 3)
+                .isEqualTo(
+                        /* last elements to temp */ 1 +
+                        /* remaining elements */ 2 +
+                        /* last elements from temp */ 1)
     }
 
 }

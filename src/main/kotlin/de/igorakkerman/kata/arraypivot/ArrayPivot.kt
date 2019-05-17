@@ -6,12 +6,21 @@ open class ArrayPivot {
         if (a.size <= 1)
             return a
 
-        repeat(n) {
-            val last = a[a.size - 1]
-            (a.size - 1 downTo 1).forEach {
-                set(a, it, a[it - 1])
-            }
-            set(a, 0, last)
+        @Suppress("NAME_SHADOWING")
+        val n = n % a.size
+
+        val last = IntArray(n)
+
+        (0 until n).forEach {
+            set(last, it, a[a.size - n + it])
+        }
+
+        (1..a.size - n).forEach {
+            set(a, a.size - it, a[a.size - n - it])
+        }
+
+        (0 until n).forEach {
+            set(a, it, last[it])
         }
 
         return a
